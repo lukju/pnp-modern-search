@@ -4,7 +4,8 @@ import { Version, Guid } from '@microsoft/sp-core-library';
 import {
     IPropertyPaneConfiguration,
     IPropertyPanePage,
-    IPropertyPaneField
+    IPropertyPaneField,
+    PropertyPaneTextField
 } from '@microsoft/sp-property-pane';
 import * as commonStrings from 'CommonStrings';
 import * as webPartStrings from 'SearchVerticalsWebPartStrings';
@@ -21,6 +22,8 @@ import { TokenService } from '../../services/tokenService/TokenService';
 import { ITokenService } from '@pnp/modern-search-extensibility';
 import { BaseWebPart } from '../../common/BaseWebPart';
 import commonStyles from '../../styles/Common.module.scss';
+import { filter } from 'lodash';
+import { IconWebComponent } from '../../components/IconComponent';
 
 export default class SearchVerticalsWebPart extends BaseWebPart<ISearchVerticalsWebPartProps> implements IDynamicDataCallables {
 
@@ -141,6 +144,18 @@ export default class SearchVerticalsWebPart extends BaseWebPart<ISearchVerticals
                     {
                         groupName: webPartStrings.PropertyPane.SearchVerticalsGroupName,
                         groupFields: this._getVerticalsConfguration()
+                    },
+                    {
+                        groupName: webPartStrings.PropertyPane.EventHandlerConfig.GroupName,
+                        groupFields: [
+                            PropertyPaneTextField('selectionChangedCode', {
+                                label: webPartStrings.PropertyPane.EventHandlerConfig.Label,
+                                description: webPartStrings.PropertyPane.EventHandlerConfig.Description,
+                                multiline: true,
+                                placeholder: webPartStrings.PropertyPane.EventHandlerConfig.PlaceholderText,
+                                rows: 5
+                            })
+                        ]
                     }
                 ],
                 displayGroupsAsAccordion: true
@@ -318,7 +333,12 @@ export default class SearchVerticalsWebPart extends BaseWebPart<ISearchVerticals
 
         this._selectedVertical = verticals.length > 0 ? verticals[0] : undefined;
 
+        if (this.properties.selectionChangedCode) {
+            eval(`var currentVertical = ${JSON.stringify(this._selectedVertical)}; ${this.properties.selectionChangedCode}`);
+        }
+        
         // Notify subscriber a new vertical has been selected
         this.context.dynamicDataSourceManager.notifyPropertyChanged(ComponentType.SearchVerticals);
+
     }
 }

@@ -5,6 +5,7 @@ define([], function() {
         },
         PropertyPane: {
             SearchVerticalsGroupName: "Zoekverticalen configuratie",
+            EventHandlersGroupName: "Event Handlers",
             Verticals: {
                 PropertyLabel: "Zoekverticalen",
                 PanelHeader: "Configureer zoekverticalen",
@@ -17,6 +18,12 @@ define([], function() {
                     LinkUrl: "Link URL",
                     OpenBehavior: "Gedrag bij openen"
                 }
+            },
+            EventHandlerConfig: {
+                GroupName: "Event Handlers",
+                Label: "On Selection Change Handler",
+                Description: "Inserted code is evaluated and executed when the selected Vertical changes. The new vertical data is available as the value of the variable 'currentVertical",
+                PlaceholderText: "Javascript Code"
             }
         }
     }

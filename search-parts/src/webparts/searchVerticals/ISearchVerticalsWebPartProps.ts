@@ -12,4 +12,6 @@ export interface ISearchVerticalsWebPartProps extends IBaseWebPartProps {
      * The configured verticals 
      */
     verticals: IDataVertical[];
+
+    selectionChangedCode: string;
 }

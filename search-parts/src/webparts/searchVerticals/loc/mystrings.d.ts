@@ -17,6 +17,12 @@ declare interface ISearchVerticalsWebPartStrings {
         OpenBehavior: string;
       }
     },
+    EventHandlerConfig: {
+      GroupName: string;
+      Label: string;
+      Description: string;
+      PlaceholderText: string;
+    },
     ImportExport: string;
   }
 }

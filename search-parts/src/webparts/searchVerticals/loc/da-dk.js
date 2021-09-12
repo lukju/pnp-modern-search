@@ -17,6 +17,12 @@ define([], function() {
           LinkUrl: "Link til URL",
           OpenBehavior: "Åben adfærd"
         }
+      },
+      EventHandlerConfig: {
+        GroupName: "Event Handlers",
+        Label: "On Selection Change Handler",
+        Description: "Inserted code is evaluated and executed when the vertical selection changes. The new vertical data is available as the value of the variable 'currentVertical",
+        PlaceholderText: "Javascript Code"
       }
     }
   }
